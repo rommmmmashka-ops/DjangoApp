@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="promo">
+        <a href="/" class="promo-button">Реєстрація</a>
+        <a href="/" class="promo-button">Скачати гру</a>
+    </div>
+    
+    <div class="news-block">
+        {% for new in news %}
+        <div class="news">
+            <a>
+            {{ new.title }}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

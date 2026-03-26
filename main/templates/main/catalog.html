@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="products">
+    {% if category %}
+    
+        {% for category in categories %}
+            <div class="category-product">
+            {% for product in products %}
+                {% if product.category == category %}
+                    <div class="product">
+                        <a>{{ product.title }}</a>
+                        <p>{{ product.price }}</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+        
+    {% else %}
+    
+        {% for product in products %}
+            <div class="product">
+                <h2><a>{{ product.title }}</a></h2>
+                <p>$ {{ product.price }}</p>
+                <div class="product-btns">
+                    <a class="product-btn">Купити</a>
+                    <a class="product-btn">У кошик</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    </div>
+
+{% endblock %}

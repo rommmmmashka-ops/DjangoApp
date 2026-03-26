@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="leaderboard">
+    <h2>Лідерборд гравців</h2>
+        <div class="leaderboard-item">
+            <h4 class="leaderboard-item-name">Гравець</h4>
+            <h4><a class="leaderboard-item-link" href="/leaderboard/level">Рівень акаунта</a></h4>
+            <h4><a class="leaderboard-item-link "href="/leaderboard/kills">Вбивства</a></h4>
+            <h4><a class="leaderboard-item-link "href="/leaderboard/vehicles_destroyed">Техніки знищено</a></h4>
+            <h4><a class="leaderboard-item-link "href="/leaderboard/deaths">Смерті</a></h4>
+        </div>
+    {% for pl in players %}
+        <div class="leaderboard-item">
+            <h4 class="leaderboard-item-name">{{ forloop.counter }}. {{ pl.name }}</h4>
+            <h4>{{ pl.level }}</h4>
+            <h4>{{ pl.kills }}</h4>
+            <h4>{{ pl.vehicles_destroyed }}</h4>
+            <h4>{{ pl.deaths }}</h4>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

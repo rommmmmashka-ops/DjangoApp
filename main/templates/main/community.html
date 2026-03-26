@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    
+    <div class="community">
+        {% for link in links %}
+            <a class="community-link" href="/">{{ link }}</a>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

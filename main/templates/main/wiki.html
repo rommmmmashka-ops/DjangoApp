@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="items-catalog">
+        {% for type in types %}
+            <h3 class="type-name">{{ type }}</h3>
+            <div class="type-catalog">
+            {% for item in items %}
+            {% if item.item_type == type %}
+                <div class="wiki-item">
+                    <a>{{ item.name }}</a>
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
