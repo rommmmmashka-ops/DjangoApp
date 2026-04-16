@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+    <div class="product-page">
+        
+        <img class="product-image" src="{{ product.image.url }}" width=90%>
+        <h2> {{ product.title }} </h2>
+        <p> {{ product.description }} </p>
+        <p class="product-price"> ${{product.price }} </p>
+        <div class="product-btns">
+            <a class="product-btn">Купити</a>
+            <a class="product-btn">У кошик</a>
+        </div>
+      
+    </div>
+    
+{% endblock %}

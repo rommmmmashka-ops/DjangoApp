@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from . import models
 
 # Create your views here.
 def home(request):
     news = models.New.objects.order_by("date")
+    file = get_object_or_404(models.Download, id=1)
     context = {
         "title": "Головна сторінка",
         "news": news,
+        "file": file,
     }
     
     
@@ -68,5 +70,12 @@ def catalogCategory(request, category):
     }
 
     return render(request, "main/catalog.html", context)
+
+def product(request, id):
+    product = get_object_or_404(models.Product, id=id)
+    context = {
+        "title": "Сторінка товару",
+        "product": product,
+    }
     
-    
+    return render(request, "main/product.html", context)

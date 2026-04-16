@@ -202,7 +202,8 @@ header {
 
 .products {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    //grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     
     width: 80%;
     margin: 100px 10% 100px 10%;  
@@ -212,6 +213,7 @@ header {
     color: #FFF;
 }
 .product {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     font-size: 24px;
@@ -223,12 +225,19 @@ header {
 }
 .product h2{
     font-size: 24px;
-    margin: 140px 0 48px 20px;
-    align-self: flex-start;
+    margin: 228px 0 0px 20px;
+    //align-self: flex-start;
+    display: flex;
+    justify-self: space-between;
+}
+.product h2 a, .product h2 p {
+    //color: black;
+    font-size: 22px;
 }
 .product p {
-    margin-right: 20px;
-    align-self: flex-end;
+    margin-left: auto;
+    margin-right: 10px;
+    //align-self: flex-end;
     color: rgba(191, 191, 191, 1);
 }
 .product-btns {
@@ -249,6 +258,48 @@ header {
     color: #FFF;
     background-color: rgba(251, 0, 0, 0.9);
 }
+
+
+.product-page {
+    width: 40%;
+    height: 800px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    margin-left: 30%;
+    color: #FFF;
+    padding: 20px;
+    background-color: rgba(10, 12, 15, 0.5);
+    
+    display: flex;
+    //justify-content: space-between;
+    flex-direction: column;
+}
+.product-image { 
+    height: 60%;
+    width: 100%;
+    //margin-left: 10%;
+    //border: 5px solid black;
+    background-color: rgba(10, 12, 15, 0.5);
+    margin-bottom: 20px;
+}
+.product-page h2 {
+    margin-bottom: 10px;
+    font-size: 36px;
+}
+.product-page .product-btn {
+    margin-top: 0px;
+    font-size: 32px;
+    height: 60px;
+}
+.product-price {
+    text-align: center;
+    margin-top: auto;
+    font-size: 32px;
+}
+.product-page .product-btns {
+    margin-top: 0px;
+}
+
 
 
 .leaderboard {
@@ -302,19 +353,22 @@ header {
 }
 .type-catalog {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     
     font-size: 18px;
 }
 .wiki-item {
-    height: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 150px;
     margin: 15px;
     padding: 10px;
-    padding-top: 70px;
+    //padding: 10px 10px 10px 10px;
     border-radius: 2px;
     background-color: rgba(0, 51, 113, 0.9);
+    overflow: hidden;
+    gap: 20px;
 }
-
 
 
 footer {

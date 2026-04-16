@@ -1,0 +1,10 @@
+{% extends "main/base.html" %}
+{% block content %}
+<h2>Сторінку не знайдено</h2>
+<p>Вас буде переспрямовано на головну...</p>
+<script>
+    setTimeout(function(){
+        window.location.href = "/";
+    }, 3000);  // через 3 секунди
+</script>
+{% endblock %}

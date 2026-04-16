@@ -9,7 +9,11 @@
             {% for item in items %}
             {% if item.item_type == type %}
                 <div class="wiki-item">
-                    <a>{{ item.name }}</a>
+                    <img src="{{ item.image.url }}">
+                    <div>
+                        <p>{{ item.name }}</p>
+                        <a>{{ item.description }}</a>
+                    </div>
                 </div>
             {% endif %}
             {% endfor %}
