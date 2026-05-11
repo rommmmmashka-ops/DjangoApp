@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="cart">
+
+        <h1>{{ title }}</h1>
+
+        {% for item in products %}
+            <div class="cart-item">
+
+                <img src="{{ item.product.image.url }}">
+                <h3>{{ item.product.title }}</h3>
+                <p>Кількість: {{ item.quantity }}</p>
+                <p>Сума: ${{ item.subtotal }}</p>
+
+                <a href="{% url 'removeCart' item.product.id %}">
+                    Видалити
+                </a>
+            </div>
+        {% endfor %}
+        <div class="cart-down"> 
+            <h2>Разом: ${{ total }} </h2>
+            <a class="cart-btn" href="{% url 'checkout' %}">Оформити замовлення</a>
+        </div>
+
+    </div>
+    
+{% endblock %}

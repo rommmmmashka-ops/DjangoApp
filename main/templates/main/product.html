@@ -9,9 +9,61 @@
         <p> {{ product.description }} </p>
         <p class="product-price"> ${{product.price }} </p>
         <div class="product-btns">
-            <a class="product-btn">Купити</a>
-            <a class="product-btn">У кошик</a>
+            <a class="product-btn" href="{% url 'addCart' product.id %}">Купити</a>
+            <a class="product-btn" href="{% url 'addCart' product.id %}">У кошик</a>
         </div>
+
+        
+        <h3 class="product-average">Середня оцінка:
+        {{ average|floatformat:1 }}
+        </h3>
+
+        <div class="product-reviews">
+        {% for review in reviews %}
+            <div class="product-reviews-review">
+
+                <h4>{{ review.nickname }}</h4>
+
+                <p>⭐ {{ review.rating }}/5</p>
+
+                <p>{{ review.comment }}</p>
+            </div>
+        {% endfor %}
+        </div>
+
+        
+        <form method="POST" class="product-form">
+            <h3 class="product-review">Оцінити</h3>
+        {% csrf_token %}
+        
+            <div class="stars">
+
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">★</label>
+
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">★</label>
+
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">★</label>
+
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">★</label>
+
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">★</label>
+
+            </div>
+
+            <input type="text" required name="nickname" placeholder="Ваш нік" class="product-form-nickname">
+            <button type="submit" class="product-form-btn">
+                Надіслати
+            </button>
+            <textarea name="comment" class="product-form-comment" placeholder="Напишіть коментар (Необов'чзково)"></textarea>
+            
+        </form>
+
+        
       
     </div>
     

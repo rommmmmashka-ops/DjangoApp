@@ -1,0 +1,61 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="cart">
+
+        <h1>{{ title }}</h1>
+
+        {% for item in products %}
+            <div class="cart-item">
+
+                <img src="{{ item.product.image.url }}">
+                <h3>{{ item.product.title }}</h3>
+                <p>Кількість: {{ item.quantity }}</p>
+                <p>Сума: ${{ item.subtotal }}</p>
+
+            </div>
+        {% endfor %}
+        {% if products %}
+        <h2></h2>
+
+        {% if invalid %}
+        <h4>Профіль не знайдено</h4>
+        {% endif %}
+        
+        <form method="POST" class="check-form">
+        {% csrf_token %}
+        
+        <div class="cart-down check-down">
+            
+            <div class="check-down-up">
+                <input type="text" name="name" placeholder="Нікнейм" required>
+                <input type="email" name="email" placeholder="Пошта" required>
+            </div>
+            <p>Способи оплати</p>
+
+            <div class="payment-options">
+                <input type="radio" id="gpay" name="payment" value="gpay" required>
+                <label for="gpay">Google Pay</label>
+
+                <input type="radio" id="apay" name="payment" value="apay" required>
+                <label for="apay">Apple Pay</label>
+
+                <input type="radio" id="other" name="payment" value="other" required>
+                <label for="other">Інший спосіб</label>
+            </div>
+                <div class="check-down-down">
+                    <h2>До сплати: ${{ total }}</h2>
+                    <button class="cart-btn" type="submit" class="">Оплатити</button>
+                </div>
+            </div>
+
+        </form>
+        {% endif %}
+        {% if not products %}
+        <a class="check-end" href="{% url 'home' %}">На головну</a>
+        {% endif %}
+
+    </div>
+    
+{% endblock %}

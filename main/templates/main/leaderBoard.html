@@ -5,10 +5,10 @@
     <h2>Лідерборд гравців</h2>
         <div class="leaderboard-item">
             <h4 class="leaderboard-item-name">Гравець</h4>
-            <h4><a class="leaderboard-item-link" href="/leaderboard/level">Рівень акаунта</a></h4>
-            <h4><a class="leaderboard-item-link "href="/leaderboard/kills">Вбивства</a></h4>
-            <h4><a class="leaderboard-item-link "href="/leaderboard/vehicles_destroyed">Техніки знищено</a></h4>
-            <h4><a class="leaderboard-item-link "href="/leaderboard/deaths">Смерті</a></h4>
+            <h4><a class="leaderboard-item-link" href="{% url 'leaderboard' 'level' %}">Рівень акаунта</a></h4>
+            <h4><a class="leaderboard-item-link "href="{% url 'leaderboard' 'kills' %}">Вбивства</a></h4>
+            <h4><a class="leaderboard-item-link "href="{% url 'leaderboard' 'vehicles_destroyed' %}">Техніки знищено</a></h4>
+            <h4><a class="leaderboard-item-link "href="{% url 'leaderboard' 'deaths' %}">Смерті</a></h4>
         </div>
     {% for pl in players %}
         <div class="leaderboard-item">

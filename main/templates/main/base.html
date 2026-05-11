@@ -2,25 +2,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
 </head>
 <body>
 
 <header>
-    <div class="logo"><img src=""></div>
-    <a href="/" class="header-item">Головна</a>
+    <!-- //<div class="logo"><img src=""></div> -->
+    <a href="{% url 'home' %}" class="header-item">Головна</a>
     <div class="dropdown">
-        <a href="/catalog" class="header-item">Магазин</a>
+        <a href="{% url 'catalog' %}" class="header-item">Магазин</a>
         <div class="dropdown-content">
             <a href="/catalog/weapon">Зброя</a>
             <a href="/catalog/cosmetics">Декор</a>
             <a href="/catalog/decals">Декалі</a>
         </div>
     </div>
-    <a href="/community" class="header-item">Спільнота</a>
-    <a href="/leaderboard" class="header-item">Лідерборд</a>
-    <a href="/wiki" class="header-item">Вікі</a>
+    <a href="{% url 'community' %}" class="header-item">Спільнота</a>
+    <a href="{% url 'leaderboard' %}" class="header-item">Лідерборд</a>
+    <a href="{% url 'wiki' %}" class="header-item">Вікі</a>
     <div></div>
     <a href="/" class="header-item">Ввійти</a>
 </header>
@@ -41,49 +43,49 @@
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Гра</a></li>
-        <li><a>Про гру</a></li>
-        <li><a>Новини</a></li>
-        <li><a>Скачати гру</a></li>
-        <li><a>Щоденник розробки</a></li>
-        <li><a>FAQ</a></li>
-        <li><a>Корисний софт</a></li>
+        <li><a href="/">Про гру</a></li>
+        <li><a href="/">Новини</a></li>
+        <li><a href="/">Скачати гру</a></li>
+        <li><a href="/">Щоденник розробки</a></li>
+        <li><a href="/">FAQ</a></li>
+        <li><a href="/">Корисний софт</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Магазин</a></li>
-        <li><a>Набори</a></li>
-        <li><a>Валюта</a></li>
-        <li><a>Преміум акаунт</a></li>
-        <li><a>Предзамовлення</a></li>
-        <li><a>Активувати код</a></li>
+        <li><a href="/">Набори</a></li>
+        <li><a href="/">Валюта</a></li>
+        <li><a href="/">Преміум акаунт</a></li>
+        <li><a href="/">Предзамовлення</a></li>
+        <li><a href="/">Активувати код</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Співробітництво</a></li>
-        <li><a>Вакансії</a></li>
+        <li><a href="/">Вакансії</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Спільнота</a></li>
-        <li><a>Відео</a></li>
-        <li><a>Форум</a></li>
-        <li><a>Пошук гравців</a></li>
+        <li><a href="/">Відео</a></li>
+        <li><a href="/">Форум</a></li>
+        <li><a href="/">Пошук гравців</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Кіберспорт</a></li>
-        <li><a>Новини</a></li>
-        <li><a>Турніри</a></li>
-        <li><a>Таблиці лідерів</a></li>
-        <li><a>Повтори</a></li>
+        <li><a href="/">Новини</a></li>
+        <li><a href="/">Турніри</a></li>
+        <li><a href="/">Таблиці лідерів</a></li>
+        <li><a href="/">Повтори</a></li>
         </ul>
         </div>
         
@@ -94,11 +96,11 @@
     
     <div class="footer-copyright">© 2009–2026 Romashka Games. Всі права захищено.</div>
     <div class="footer-links">
-        <a href="">Умови використання</a>
-        <a href="">Умови надання послуг</a>
-        <a href="">Політика конфіденційності</a>
-        <a href="">Налаштування Cookie</a>
-        <a href="">Підтримка користувачів</a>
+        <a href="/">Умови використання</a>
+        <a href="/">Умови надання послуг</a>
+        <a href="/">Політика конфіденційності</a>
+        <a href="/">Налаштування Cookie</a>
+        <a href="/">Підтримка користувачів</a>
     </div>
     
 </footer>

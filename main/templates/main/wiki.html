@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <div class="items-catalog">
+    <!-- <div class="items-catalog">
         {% for type in types %}
             <h3 class="type-name">{{ type }}</h3>
             <div class="type-catalog">
             {% for item in items %}
             {% if item.item_type == type %}
-                <div class="wiki-item">
+                <div class="wiki-item" onclick="window.location.href='{% url 'wikiItem' item.id %}'">
                     <img src="{{ item.image.url }}">
                     <div>
                         <p>{{ item.name }}</p>
@@ -19,6 +19,24 @@
             {% endfor %}
             </div>
         {% endfor %}
-    </div>
+    </div> -->
+    <div class="items-catalog">
+    {% for type in types %}
+        <h3 class="type-name">{{ type }}</h3>
+        <div class="type-catalog">
+        {% for item in items %}
+        {% if item.item_type == type %}
+            <a href="{% url 'wikiItem' item.id %}" class="wiki-item">
+                <img src="{{ item.image.url }}">
+                <div>
+                    <h4>{{ item.name }}</h4>
+                    <p>{{ item.description }}</p>
+                </div>
+            </a>
+        {% endif %}
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>
     
 {% endblock %}

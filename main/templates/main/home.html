@@ -9,12 +9,28 @@
     
     <div class="news-block">
         {% for new in news %}
-        <div class="news">
-            <a>
+        <a class="news" href="/">
+            <h3>
             {{ new.title }}
-            </a>
-        </div>
+            </h3>
+        </a>
         {% endfor %}
+    </div>
+
+    <div class="subscribe dropdown"> 
+            
+        <form method="POST">
+
+        {% csrf_token %}
+            
+            <button type="submit" class="subscribe-btn">Підписатися на розсилку новини</button>
+
+            <div class="dropdown-content subscribe-drop">
+                <input type="email" name="email" placeholder="Ваш email" required>
+            </div>
+            
+
+        </form>
     </div>
     
 {% endblock %}
