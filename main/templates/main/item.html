@@ -2,16 +2,17 @@
 
 {% block content %}
 
-    <div class="item-page">
+    <div class="item-page-container">
+        <div class="item-page">
+            
+            <div class="item-image-wrapper">
+                <img class="item-image" src="{{ item.image.url }}" alt="{{ item.name }}">
+            </div>
+
+            <h2 class="item-title">{{ item.name }}</h2>
+            <p class="item-descr">{{ item.description }}</p>
         
-        <img class="item-image" src="{{ item.image.url }}" width=90%>
-        <div class="item-text">
-
-            <h2 class="item-title"> {{ item.name }} </h2>
-            <p class="item-descr"> {{ item.description }} </p>
-
         </div>
-      
     </div>
     
 {% endblock %}

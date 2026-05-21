@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Item, Achievement, New, Product, Download, Review, Subscriber, Order, OrderItem
+from .models import Profile, Item, Achievement, New, Product, Download, Review, Subscriber, Order, OrderItem, InventoryItem
 
 # Register your models here.
 #admin.site.register(Profile)
@@ -7,7 +7,7 @@ from .models import Profile, Item, Achievement, New, Product, Download, Review, 
 #admin.site.register(Achievement)
 
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ("title","date", "created_at", "updated_at")
+    list_display = ("title", "date", "created_at", "updated_at")
 
 class DownloadAdmin(admin.ModelAdmin):
     list_display = ("title", "file")
@@ -23,6 +23,9 @@ class OrderAdmin(admin.ModelAdmin):
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ("order", "product", "quantity")
+
+class InventoryItemAdmin(admin.ModelAdmin):
+    list_display = ("profile", "product", "quantity")
 
 class SubscriberAdmin(admin.ModelAdmin):
     list_display = ("email", "id", "created_at")
@@ -45,4 +48,5 @@ admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Subscriber, SubscriberAdmin)
 admin.site.register(Item, ItemAdmin)
+admin.site.register(InventoryItem, InventoryItemAdmin)
 admin.site.register(Achievement, AchievementAdmin)

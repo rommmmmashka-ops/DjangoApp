@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="news-detail-container">
+    <article class="news-article">
+        <a href="{% url 'home' %}" class="back-link">← На головну</a>
+        
+        <h1 class="article-title">{{ new_item.title }}</h1>
+        
+        {% if new_item.image %}
+            <div class="article-image-wrapper">
+                <img src="{{ new_item.image.url }}" alt="{{ new_item.title }}" class="article-image">
+            </div>
+        {% endif %}
+        
+        <div class="article-meta">
+            <span>📅 {{ new_item.date|date:"d E Y" }}</span>
+        </div>
+        
+        <div class="article-text">
+            {{ new_item.description|linebreaks }}
+        </div>
+    </article>
+</div>
+{% endblock %}

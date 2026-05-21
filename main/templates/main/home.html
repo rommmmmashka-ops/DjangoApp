@@ -2,35 +2,44 @@
 
 {% block content %}
 
-    <div class="promo">
-        <a href="/" class="promo-button">Реєстрація</a>
-        <a class="promo-button" href="{{ file.file.url }}" download>Скачати гру</a>
-    </div>
-    
-    <div class="news-block">
-        {% for new in news %}
-        <a class="news" href="/">
-            <h3>
-            {{ new.title }}
-            </h3>
-        </a>
-        {% endfor %}
-    </div>
-
-    <div class="subscribe dropdown"> 
-            
-        <form method="POST">
-
-        {% csrf_token %}
-            
-            <button type="submit" class="subscribe-btn">Підписатися на розсилку новини</button>
-
-            <div class="dropdown-content subscribe-drop">
-                <input type="email" name="email" placeholder="Ваш email" required>
+    <div class="home-container">
+        
+        <div class="promo-hero">
+            <div class="promo-hero-overlay"></div> <div class="promo-content">
+                <h1 class="promo-title">Ласкаво просимо до Wry Arena 3D</h1>
+                <div class="promo-buttons-row">
+                    <a href="{% url 'register' %}" class="promo-button btn-reg">Реєстрація</a>
+                    <a class="promo-button btn-down" id="download" href="{{ file.file.url }}" download>Скачати гру</a>
+                </div>
             </div>
-            
+        </div>
 
-        </form>
+        <h2 class="section-title" id="news">🔥 Останні новини</h2>
+        <div class="news-block">
+            {% for new in news %}
+            <a class="news-card" href="{% url 'newsDetail' new.id %}">
+                <div class="news-card-content">
+                    <h3>{{ new.title }}</h3>
+                    <span class="news-more">Читати далі →</span>
+                </div>
+            </a>
+            {% empty %}
+            <p class="no-news">Свіжих новин наразі немає.</p>
+            {% endfor %}
+        </div>
+
+        <div class="subscribe-section"> 
+            <div class="subscribe-box">
+                <h3>Будь в курсі подій</h3>
+                <p>Підпишись на розсилку, щоб першим дізнаватися про оновлення</p>
+                <form method="POST" class="subscribe-form">
+                    {% csrf_token %}
+                    <input type="email" name="email" placeholder="Ваш email" required autocomplete="off">
+                    <button type="submit" class="subscribe-btn">Підписатися</button>
+                </form>
+            </div>
+        </div>
+        
     </div>
     
 {% endblock %}

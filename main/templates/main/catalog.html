@@ -1,37 +1,49 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-
-    <div class="products">
-    {% if category %}
-    
-        {% for category in categories %}
-            <div class="category-product">
-            {% for product in products %}
-                {% if product.category == category %}
-                    <div class="product">
-                        <a>{{ product.title }}</a>
-                        <p>{{ product.price }}</p>
-                    </div>
-                {% endif %}
-            {% endfor %}
-            </div>
-        {% endfor %}
+    <div class="products-container">
+        <div class="products">
         
-    {% else %}
-    
-        {% for product in products %}
-            <div class="product" style="background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.9) 100%), url('{{ product.image.url }}') 50%;"
-            onclick="window.location.href='{% url 'product' product.id %}'">
-                <h2><a>{{ product.title }}</a><p>$ {{ product.price }}</p></h2>
-                <div class="product-btns">
-                    <a href="{% url 'addCart' product.id %}" class="product-btn">Купити</a>
-                    <a href="{% url 'addCart' product.id %}" class="product-btn">У кошик</a>
+        {% if category %}
+            {% for cat in categories %}
+                {% for product in products %}
+                    {% if product.category == cat %}
+                        <div class="product" style="background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(2, 16, 30, 0.95) 90%), url('{{ product.image.url }}') center/cover no-repeat;"
+                        onclick="window.location.href='{% url 'product' product.id %}'">
+                            
+                            <div class="product-info">
+                                <h2 class="product-title">{{ product.title }}</h2>
+                                <p class="product-price">${{ product.price }}</p>
+                            </div>
+                            
+                            <div class="product-btns">
+                                <a href="{% url 'addCart' product.id %}" class="product-btn btn-buy" onclick="event.stopPropagation();">Купити</a>
+                                <a href="{% url 'addCart' product.id %}" class="product-btn btn-cart" onclick="event.stopPropagation();">У кошик</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            
+        {% else %}
+            {% for product in products %}
+                <div class="product" style="background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(2, 16, 30, 0.95) 90%), url('{{ product.image.url }}') center/cover no-repeat;"
+                onclick="window.location.href='{% url 'product' product.id %}'">
+                    
+                    <div class="product-info">
+                        <h2 class="product-title">{{ product.title }}</h2>
+                        <p class="product-price">${{ product.price }}</p>
+                    </div>
+                    
+                    <div class="product-btns">
+                        <a href="{% url 'addCart' product.id %}" class="product-btn btn-buy" onclick="event.stopPropagation();">Купити</a>
+                        <a href="{% url 'addCart' product.id %}" class="product-btn btn-cart" onclick="event.stopPropagation();">У кошик</a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    {% endif %}
-    
+            {% endfor %}
+        {% endif %}
+        
+        </div>
     </div>
 
 {% endblock %}

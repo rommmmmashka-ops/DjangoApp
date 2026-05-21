@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="register"> <form method="POST">
+        {% csrf_token %}
+            
+            <h2>Новий пароль</h2>
+
+            {% if messages %}
+                <div class="form-errors">
+                    {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <input type="text" name="code" placeholder="6-значний код з Email" required autocomplete="off">
+            <input type="password" name="password" placeholder="Новий пароль" required>
+            
+            <button type="submit">
+                Оновити пароль
+            </button>
+        </form>
+    </div>
+{% endblock %}

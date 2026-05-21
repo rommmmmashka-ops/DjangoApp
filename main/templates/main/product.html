@@ -2,69 +2,83 @@
 
 {% block content %}
 
-    <div class="product-page">
-        
-        <img class="product-image" src="{{ product.image.url }}" width=90%>
-        <h2> {{ product.title }} </h2>
-        <p> {{ product.description }} </p>
-        <p class="product-price"> ${{product.price }} </p>
-        <div class="product-btns">
-            <a class="product-btn" href="{% url 'addCart' product.id %}">Купити</a>
-            <a class="product-btn" href="{% url 'addCart' product.id %}">У кошик</a>
-        </div>
-
-        
-        <h3 class="product-average">Середня оцінка:
-        {{ average|floatformat:1 }}
-        </h3>
-
-        <div class="product-reviews">
-        {% for review in reviews %}
-            <div class="product-reviews-review">
-
-                <h4>{{ review.nickname }}</h4>
-
-                <p>⭐ {{ review.rating }}/5</p>
-
-                <p>{{ review.comment }}</p>
-            </div>
-        {% endfor %}
-        </div>
-
-        
-        <form method="POST" class="product-form">
-            <h3 class="product-review">Оцінити</h3>
-        {% csrf_token %}
-        
-            <div class="stars">
-
-                <input type="radio" id="star5" name="rating" value="5">
-                <label for="star5">★</label>
-
-                <input type="radio" id="star4" name="rating" value="4">
-                <label for="star4">★</label>
-
-                <input type="radio" id="star3" name="rating" value="3">
-                <label for="star3">★</label>
-
-                <input type="radio" id="star2" name="rating" value="2">
-                <label for="star2">★</label>
-
-                <input type="radio" id="star1" name="rating" value="1">
-                <label for="star1">★</label>
-
-            </div>
-
-            <input type="text" required name="nickname" placeholder="Ваш нік" class="product-form-nickname">
-            <button type="submit" class="product-form-btn">
-                Надіслати
-            </button>
-            <textarea name="comment" class="product-form-comment" placeholder="Напишіть коментар (Необов'чзково)"></textarea>
+    <div class="product-page-container">
+        <div class="product-page">
             
-        </form>
+            <div class="product-left">
+                <div class="product-image-wrapper">
+                    <img class="product-image" src="{{ product.image.url }}" alt="{{ product.title }}">
+                </div>
+            </div>
 
-        
-      
+            <div class="product-right">
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert-msg {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <h2 class="product-page-title">{{ product.title }}</h2>
+                <p class="product-description-text">{{ product.description }}</p>
+                
+                <div class="product-price-block">
+                    <p class="product-page-price">${{ product.price }}</p>
+                    <div class="product-page-btns">
+                        <a class="product-page-btn btn-buy" href="{% url 'addCart' product.id %}">Купити</a>
+                        <a class="product-page-btn btn-cart" href="{% url 'addCart' product.id %}">У кошик</a>
+                    </div>
+                </div>
+
+                <div class="reviews-section">
+                    <h3 class="product-average">
+                        📊 Середня оцінка: <span>{{ average|floatformat:1 }}</span> / 5
+                    </h3>
+
+                    <div class="product-reviews">
+                        {% for review in reviews %}
+                            <div class="product-reviews-review">
+                                <div class="review-header">
+                                    <h4>👤 {{ review.nickname }}</h4>
+                                    <span class="review-rating">⭐ {{ review.rating }}/5</span>
+                                </div>
+                                <p class="review-comment">{{ review.comment }}</p>
+                            </div>
+                        {% empty %}
+                            <p class="no-reviews">Оцінок ще немає. Станьте першим!</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <form method="POST" class="product-form">
+                    {% csrf_token %}
+                    <h3 class="form-title">⭐️ Залишити оцінку</h3>
+                    
+                    <div class="form-row-top">
+                        <div class="stars">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                        
+                        <input type="text" required name="nickname" placeholder="Ваш нікнейм" class="product-form-nickname" autocomplete="off">
+                    </div>
+
+                    <textarea name="comment" class="product-form-comment" placeholder="Напишіть свій коментар (необов'язково)"></textarea>
+                    
+                    <button type="submit" class="product-form-btn">Надіслати відгук</button>
+                </form>
+
+            </div>
+
+        </div>
     </div>
     
 {% endblock %}

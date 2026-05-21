@@ -1,10 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+import uuid
 
 # Create your models here.
 class Profile(models.Model):
-    name = models.CharField(max_length=40, unique=True)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30, unique=True)
     level = models.IntegerField(default=1)
-    achievements = models.ManyToManyField("Achievement")
+    achievements = models.ManyToManyField("Achievement", blank=True, null=True)
     email = models.EmailField(null=True, unique=False)
     
     kills = models.IntegerField(default=0)
@@ -12,8 +16,6 @@ class Profile(models.Model):
     current_killstreak = models.IntegerField(default=0)
     max_killstreak = models.IntegerField(default=0)
     vehicles_destroyed = models.IntegerField(default=0)
-    #time_alive = models.IntegerField(default=0)
-    #max_time_alive = models.IntegerField(default=0)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -23,6 +25,7 @@ class Profile(models.Model):
 
 class New(models.Model):
     title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="news/", default="news/no_foto.jpg", null=True, blank=True)
     description = models.TextField(default="")
     date = models.DateField(auto_now_add=True)
     href = models.TextField()
@@ -81,7 +84,7 @@ class Review(models.Model):
     comment = models.TextField(default="")
     rating = models.IntegerField()
 
-    nickname = models.CharField(max_length=50)
+    nickname = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     ip_address = models.GenericIPAddressField(null=True)
 
@@ -107,9 +110,8 @@ class Achievement(models.Model):
 
 class Item(models.Model):
     TYPE_CHOICES = [
-        ("Tool", "Tool"),
-        ("Weapon", "Weapon"),
         ("Gun", "Gun"),
+        ("Melee Weapon", "Melee Weapon"),
         ("Armor", "Armor"),
         ("Other", "Other"),
     ]
@@ -123,3 +125,14 @@ class Item(models.Model):
     
     def __str__(self):
         return self.name
+
+class PasswordResetCode(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.CharField(max_length=6, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_used = models.BooleanField(default=False)
+
+    def is_valid(self):
+        # Код дійсний 5 хвилин і якщо він ще не був використаний
+        expiry_time = self.created_at + timezone.timedelta(minutes=5)
+        return timezone.now() < expiry_time and not self.is_used

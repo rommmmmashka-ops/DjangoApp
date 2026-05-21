@@ -10,21 +10,28 @@
 <body>
 
 <header>
-    <!-- //<div class="logo"><img src=""></div> -->
-    <a href="{% url 'home' %}" class="header-item">Головна</a>
-    <div class="dropdown">
-        <a href="{% url 'catalog' %}" class="header-item">Магазин</a>
-        <div class="dropdown-content">
-            <a href="/catalog/weapon">Зброя</a>
-            <a href="/catalog/cosmetics">Декор</a>
-            <a href="/catalog/decals">Декалі</a>
+    <div class="header">
+        <a href="{% url 'home' %}" class="header-item">Головна</a>
+        <div class="dropdown">
+            <a href="{% url 'catalog' %}" class="header-item">Магазин</a>
+            <div class="dropdown-content">
+                <a href="{% url 'catalogCategory' "weapon" %}">Зброя</a>
+                <a href="{% url 'catalogCategory' "cosmetics" %}">Декор</a>
+                <a href="{% url 'catalogCategory' "decals" %}">Декалі</a>
+            </div>
         </div>
+        <a href="{% url 'community' %}" class="header-item">Спільнота</a>
+        <a href="{% url 'leaderboard' %}" class="header-item">Лідерборд</a>
+        <a href="{% url 'wiki' %}" class="header-item">Вікі</a>
+        <div></div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="header-item">Вийти</a>
+            <a href="{% url 'account' %}" class="header-item">Особистий кабінет</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="header-item">Вхід</a>
+            <a href="{% url 'register' %}" class="header-item">Реєстрація</a>
+        {% endif %}
     </div>
-    <a href="{% url 'community' %}" class="header-item">Спільнота</a>
-    <a href="{% url 'leaderboard' %}" class="header-item">Лідерборд</a>
-    <a href="{% url 'wiki' %}" class="header-item">Вікі</a>
-    <div></div>
-    <a href="/" class="header-item">Ввійти</a>
 </header>
 
 <wrapper>
@@ -43,64 +50,46 @@
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Гра</a></li>
-        <li><a href="/">Про гру</a></li>
-        <li><a href="/">Новини</a></li>
-        <li><a href="/">Скачати гру</a></li>
-        <li><a href="/">Щоденник розробки</a></li>
-        <li><a href="/">FAQ</a></li>
-        <li><a href="/">Корисний софт</a></li>
+        <li><a href="{% url 'docs' %}?tab=about">Про гру</a></li>
+        <li><a href="/#news">Новини</a></li>
+        <li><a href="/#download">Скачати гру</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Магазин</a></li>
-        <li><a href="/">Набори</a></li>
-        <li><a href="/">Валюта</a></li>
-        <li><a href="/">Преміум акаунт</a></li>
-        <li><a href="/">Предзамовлення</a></li>
-        <li><a href="/">Активувати код</a></li>
-        </ul>
-        </div>
-        
-        <div class="footer-menu-items">
-        <ul class="footer-menu-item">
-        <li class="footer-menu-fitem"><a>Співробітництво</a></li>
-        <li><a href="/">Вакансії</a></li>
+        <li><a href="{% url 'catalogCategory' "weapon" %}">Зброя</a></li>
+        <li><a href="{% url 'catalogCategory' "cosmetics" %}">Декор</a></li>
+        <li><a href="{% url 'catalogCategory' "decals" %}">Декалі</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Спільнота</a></li>
-        <li><a href="/">Відео</a></li>
-        <li><a href="/">Форум</a></li>
-        <li><a href="/">Пошук гравців</a></li>
+        <li><a href="https://www.youtube.com/">Youtube</a></li>
+        <li><a href="https://t.me/">Telegram</a></li>
+        <li><a href="https://www.instagram.com/">Instagram</a></li>
         </ul>
         </div>
         
         <div class="footer-menu-items">
         <ul class="footer-menu-item">
         <li class="footer-menu-fitem"><a>Кіберспорт</a></li>
-        <li><a href="/">Новини</a></li>
-        <li><a href="/">Турніри</a></li>
-        <li><a href="/">Таблиці лідерів</a></li>
-        <li><a href="/">Повтори</a></li>
+        <li><a href="{% url 'leaderboard' %}">Таблиці лідерів</a></li>
+        <li><a href="/#news">Новини</a></li>
         </ul>
         </div>
         
     </div>
     
-    <div class="footer-logotypes">
-    </div>
-    
-    <div class="footer-copyright">© 2009–2026 Romashka Games. Всі права захищено.</div>
+    <div class="footer-copyright footer-item">© 2009–2026 Romashka Games. Всі права захищено.</div>
     <div class="footer-links">
-        <a href="/">Умови використання</a>
-        <a href="/">Умови надання послуг</a>
-        <a href="/">Політика конфіденційності</a>
-        <a href="/">Налаштування Cookie</a>
-        <a href="/">Підтримка користувачів</a>
+        <a href="{% url 'docs' %}?tab=terms">Умови використання</a>
+        <a href="{% url 'docs' %}?tab=services">Умови надання послуг</a>
+        <a href="{% url 'docs' %}?tab=privacy">Політика конфідеціальності</a>
+        <a href="{% url 'docs' %}?tab=cookies">Налаштування Cookie</a>
     </div>
     
 </footer>

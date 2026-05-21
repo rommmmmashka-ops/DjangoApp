@@ -1,0 +1,125 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="account-container admin-container">
+    <div class="account-header-block">
+        <h2>Панель адміністратора {{ user.username }}</h2>
+        <a href="{% url 'requestReset' %}" class="btn-password-reset">
+            🔒 Змінити пароль
+        </a>
+    </div>
+
+    <p class="admin-subtitle">Усього зареєстровано користувачів: {{ all_users.count }}</p>
+
+    {% if all_users %}
+        {% for site_user in all_users %}
+            <details class="user-accordion">
+                <summary class="user-summary">
+                    <span class="user-main-info">👤 {{ site_user.username }}</span>
+                    <span class="user-email">Email: {{ site_user.email|default:"не вказано" }}</span>
+                    <span class="user-joined">Реєстрація: {{ site_user.date_joined|date:"d.m.Y" }}</span>
+                </summary>
+
+                <div class="user-content">
+                    <h4>Ігрові профілі користувача ({{ site_user.profile_set.count }}):</h4>
+
+                    {% if site_user.profile_set.all %}
+                        {% for profile in site_user.profile_set.all %}
+                            
+                            <details class="profile-accordion admin-profile">
+                                <summary class="profile-summary">
+                                    <span class="profile-name">🎮 {{ profile.name }}</span>
+                                    <span class="profile-level">Рівень: {{ profile.level }}</span>
+                                    <span class="profile-stats">💀 K/D: {{ profile.kills }}/{{ profile.deaths }}</span>
+                                </summary>
+
+                                <div class="profile-orders-content">
+                                    
+                                    <div class="profile-section">
+                                        <h3>🏆 Досягнення</h3>
+                                        {% if profile.achievements.all %}
+                                            <table class="account-table">
+                                                <thead>
+                                                    <tr><th>Назва</th><th>Опис</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for ac in profile.achievements.all %}
+                                                        <tr><td class="highlight-text">🥇 {{ ac.title }}</td><td>{{ ac.description }}</td></tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        {% else %}
+                                            <p class="no-data">Немає досягнень.</p>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="profile-section">
+                                        <h3>📦 Інвентар</h3>
+                                        {% if profile.inventoryitem_set.all %}
+                                            <table class="account-table">
+                                                <thead>
+                                                    <tr><th>Предмет</th><th>Назва</th><th>№</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for item in profile.inventoryitem_set.all %}
+                                                        <tr>
+                                                            <td><img src="{{ item.product.image.url }}" class="table-item-img"></td>
+                                                            <td class="highlight-text">{{ item.product.title }}</td>
+                                                            <td class="font-bold">x{{ item.quantity }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        {% else %}
+                                            <p class="no-data">Інвентар порожній.</p>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="profile-section">
+                                        <h3>🧾 Історія замовлень</h3>
+                                        {% if profile.order_set.all %}
+                                            <div class="orders-list">
+                                                {% for order in profile.order_set.all %}
+                                                    <div class="order-card">
+                                                        <div class="order-header">
+                                                            <span class="order-id">Замовлення #{{ order.id }}</span>
+                                                            <span class="order-date">{{ order.created_at|date:"d.m.Y H:i" }}</span>
+                                                        </div>
+                                                        <ul class="order-items">
+                                                            {% for item in order.orderitem_set.all %}
+                                                                <li>
+                                                                    <img src="{{ item.product.image.url }}" class="order-item-img">
+                                                                    <div class="order-item-info">
+                                                                        <span class="item-title">{{ item.product.title }}</span>
+                                                                    </div>
+                                                                    <span class="item-qty">x{{ item.quantity }}</span>
+                                                                    <span class="item-price">$ {{ item.product.price }}</span>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                        <div class="order-total">
+                                                            <span>Всього:</span><strong>$ {{ order.total }}</strong>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <p class="no-data">Замовлень немає.</p>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </details>
+
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data" style="padding-left: 20px;">Цей користувач ще не створив жодного ігрового профілю.</p>
+                    {% endif %}
+                </div>
+            </details>
+        {% endfor %}
+    {% else %}
+        <p class="no-profiles">Користувачів в базі даних не знайдено.</p>
+    {% endif %}
+</div>
+{% endblock %}

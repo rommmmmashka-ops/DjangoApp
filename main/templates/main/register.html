@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="register">
+
+        <form method="POST">
+        {% csrf_token %}
+            
+            {% if messages %}
+                <div class="form-errors">
+                    {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <input type="text" name="username" placeholder="Введіть логін" required autocomplete="off">
+            <input type="email" name="email" placeholder="Введіть Email" required autocomplete="off">
+            <input type="password" name="password" placeholder="Введіть пароль" required autocomplete="off">
+            <button type="submit">
+                Реєстрація
+            </button>
+
+            <p class="auth-redirect">
+                Вже маєте акаунт? <a href="{% url 'login' %}">Увійти</a>
+            </p>
+
+        </form>
+
+    </div>
+    
+{% endblock %}

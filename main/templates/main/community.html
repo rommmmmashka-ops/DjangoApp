@@ -4,7 +4,7 @@
     
     <div class="community">
         {% for link in links %}
-            <a class="community-link" href="/">{{ link }}</a>
+            <a class="community-link" href="{{ link.1 }}">{{ link.0 }}</a>
         {% endfor %}
     </div>
     

@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="register"> <form method="POST">
+        {% csrf_token %}
+            
+            <h2>Скидання пароля</h2>
+
+            {% if messages %}
+                <div class="form-errors">
+                    {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <p style="color: gray; font-size: 14px; text-align: center; margin-bottom: 20px;">
+                Введіть ваш Email. Ми надішлемо тимчасовий код для підтвердження.
+            </p>
+
+            <input type="email" name="email" placeholder="Ваш Email" required>
+            
+            <button type="submit">
+                Надіслати код
+            </button>
+        </form>
+    </div>
+{% endblock %}

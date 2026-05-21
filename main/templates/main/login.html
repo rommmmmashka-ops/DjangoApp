@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <div class="register">
+
+        <form method="POST">
+        {% csrf_token %}
+            
+            {% if messages %}
+                <div class="form-errors">
+                    {% for message in messages %}
+                        <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <input type="text" name="username" placeholder="Введіть логін або Email" required>
+            <input type="password" name="password" placeholder="Введіть пароль" required>
+            <button type="submit">
+                Вхід
+            </button>
+
+            <p class="auth-redirect">
+                <a href="{% url 'requestReset' %}">Забули пароль?</a>
+            </p>
+
+        </form>
+
+    </div>
+    
+{% endblock %}

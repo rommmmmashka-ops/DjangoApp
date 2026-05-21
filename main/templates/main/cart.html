@@ -2,28 +2,40 @@
 
 {% block content %}
 
-    <div class="cart">
+    <div class="cart-container">
+        <div class="cart">
+            <h1>{{ title }}</h1>
 
-        <h1>{{ title }}</h1>
+            {% if products %}
+                <div class="cart-items-list">
+                    {% for item in products %}
+                        <div class="cart-item">
+                            <div class="cart-item-img-wrapper">
+                                <img src="{{ item.product.image.url }}">
+                            </div>
+                            <div class="cart-item-details">
+                                <h3>{{ item.product.title }}</h3>
+                                <p class="item-qty">Кількість: <span>{{ item.quantity }}</span></p>
+                                <p class="item-subtotal">Сума: <span>${{ item.subtotal }}</span></p>
+                            </div>
+                            <a href="{% url 'removeCart' item.product.id %}" class="cart-remove-btn">
+                                ❌ Видалити
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
 
-        {% for item in products %}
-            <div class="cart-item">
-
-                <img src="{{ item.product.image.url }}">
-                <h3>{{ item.product.title }}</h3>
-                <p>Кількість: {{ item.quantity }}</p>
-                <p>Сума: ${{ item.subtotal }}</p>
-
-                <a href="{% url 'removeCart' item.product.id %}">
-                    Видалити
-                </a>
-            </div>
-        {% endfor %}
-        <div class="cart-down"> 
-            <h2>Разом: ${{ total }} </h2>
-            <a class="cart-btn" href="{% url 'checkout' %}">Оформити замовлення</a>
+                <div class="cart-down"> 
+                    <h2>Разом: <span class="total-accent">${{ total }}</span></h2>
+                    <a class="cart-btn action-btn" href="{% url 'checkout' %}">Оформити замовлення</a>
+                </div>
+            {% else %}
+                <div class="empty-cart-state">
+                    <p>Ваш кошик порожній</p>
+                    <a class="cart-btn action-btn" href="{% url 'catalog' %}">Повернутись до магазину</a>
+                </div>
+            {% endif %}
         </div>
-
     </div>
-    
+
 {% endblock %}
